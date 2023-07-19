@@ -1,0 +1,120 @@
+body{
+    background-color: #495057;
+}
+
+#hud-menu{
+    display: flex;
+    column-gap: 1em;
+}
+
+.hud-div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+}
+.hud-img{
+    width: 1.5em;
+    margin-right: 0.5em;
+}
+
+#level-circle{
+    position: relative;
+    z-index: 1;
+    width: 4em;
+}
+#level-div p{
+    position: relative;
+    z-index: 2;
+    margin-top: -1.8em;
+    margin-left: 0.7em;
+    font-size: 2em;
+    color: white;
+}
+
+#hud-heart{
+    
+}
+#hud-energy{
+    
+}
+.progress{
+    width: 10em;
+}
+
+
+#game-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap:5em;
+}
+#game-div p{
+    font-size: 1.5em;
+    padding: 2em;
+    text-align: center;
+    color: white;
+}
+
+.choice_btn{
+    width: 15em;
+    height: 5em;
+    border-radius: 10px;
+    background-color: #242235;
+    border: 2px;
+    color: white;
+}
+
+#main-menu{
+    display: flex;
+    width: 100%;
+    bottom: 0px;
+    position: fixed;
+    background-color: #242235;
+    flex-direction: column;
+    z-index: 2;
+}
+#main-menu .title{
+    font-size: 2.5em;
+    text-align: center;
+    color: white;
+}
+.menu-active{
+    animation:menu-active 0.4s linear;
+    height: 100%;
+    row-gap: 4em;
+}
+@keyframes menu-active{
+    0%{height: 5%;}
+    25%{height: 25%;}
+    50%{height: 50%;}
+    75%{height: 75%;}
+    100%{height: 100%;}
+}
+
+#menu-contents{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 3em;
+    color: white;
+    font-weight: 100;
+}
+.menu-div{
+    display: none;
+}
+.menu-div-active{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 5em;
+    transition: menu-div-active 1s linear;
+    font-size: 2.5em;
+}
+@keyframes menu-div-active{
+    0%{
+        display: none;
+    }
+    100%{
+        display: flex;
+    }
+}

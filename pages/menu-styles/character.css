@@ -1,0 +1,23 @@
+#char-menu{
+    display: flex;
+    column-gap: 0.5em;
+    align-items: center;
+    justify-content: center;
+    background-color:#495057;
+}
+
+
+.char-links button{
+    width: 3.2em;
+    height: 2.5em;
+    background-color: midnightblue;
+    border: 1px solid midnightblue;
+    font-size: 2em;
+    color: white;
+}
+
+#back-arrow{
+    width: 3em;
+    height: 2em;
+    margin-right: 1em;
+}

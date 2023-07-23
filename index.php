@@ -22,10 +22,10 @@
 <body>
 
     <div id='hud-menu'>
-      <div id='level-div'>
+       <div id='level-div'>
         <img id='level-circle' src="icons/level-circle.png" alt="black circle">
         <p>1</p>
-      </div>
+       </div>
       
        <div class='hud-div' id='hp-div'>
         <img class='hud-img' id='hud-heart' src="icons/heart.png" alt="heart">

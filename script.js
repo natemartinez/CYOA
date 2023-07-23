@@ -20,8 +20,5 @@ $('#stats-link').click(function(){
     $('#dna-content').addClass('content-deactive');
     $('#bio-content').addClass('content-deactive');
 });
-
-
-
-
 //
+

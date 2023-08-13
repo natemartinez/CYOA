@@ -21,7 +21,7 @@
 
 <body>
 
-    <div id='hud-menu'>
+    <div class='hud-menu'>
        <div id='level-div'>
         <img id='level-circle' src="icons/level-circle.png" alt="black circle">
         <p>1</p>
@@ -46,17 +46,19 @@
      
     </div>
 
-    <div id='game-div'>
-     <p>Example Text - Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit at suscipit quis iste, saepe vero dicta repellat</p>
+    <div class='game-div'>
+     <p>Example Text - Lorem ipsum dolor, sit amet consectetur adipisicing elit. <br> Fugit at suscipit quis iste, saepe vero dicta repellat</p>
 
      <button class='choice_btn'>Choice 1</button>
      <button class='choice_btn'>Choice 2</button>     
     </div>
 
+    <div class='menu text-center'>
+      <a id='open-menu' href="javascript:void(0)">Open Menu</a>
+    </div>
 
-    <div id='main-menu'>
-     <p class='title'>Menu</p>
-      <div id='menu-contents'>
+    <div class='main-menu'>
+        <a id='close-menu' href="javascript:void(0)">Close Menu</a>
         <div class='menu-div'>
          <a href="pages/character.php">Character</a>
         </div>
@@ -72,7 +74,6 @@
         <div class='menu-div'>
         <a href="pages/settings.php">Settings</a>
         </div>                           
-      </div>
     </div>
    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>    

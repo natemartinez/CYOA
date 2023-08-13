@@ -1,8 +1,25 @@
 <?php    
  session_start();
+ include '../db.php';
+
+ $username = "SELECT name FROM stats ORDER BY id DESC LIMIT 1";
+ $result = $conn->query($username);
+
+ if ($conn->query($username) == TRUE) {
+   if ($result->num_rows > 0) {
+     while ($row = $result->fetch_assoc()) {
+       $playername = $row["name"];
+     }
+    } else{
+       echo "Error: " . $username . "<br>" . $conn->error;
+     } 
+}else{
+  echo "Error";
+}
+ 
 
 ?>
-<!DOCTYPE html>
+
 <html>
 
 <head>
@@ -38,10 +55,8 @@
         <div class='char-content' id='bio-content'>    
           <div id='bio-stats'>
             <div>
-             <p>Name:</p>
-             <p>Type:</p>
-             <p>Birthplace:</p>
-             <p>Birthdate:</p>
+             <p>Name: <?php echo $playername; ?></p>
+             <p>Level:</p>
             </div>
             <div id='profile'></div>            
           </div>
@@ -52,34 +67,33 @@
         </div>
         <div class='char-content content-deactive' id='dna-content'>
 
-          <p>Put the user's overall type here(MBTI)</p>
+          <p></p>
 
           <div id='brain-div'>
             <img id='brain' src="../images/demo-brain.png" alt="top view of brain">
             <div id='brain-title'>
              <p>Left-brained</p>
              <p>Right-brained</p> 
-            </div>
-            
+            </div>    
           </div>     
 
           <div id='dna-stats'>
             <div class='dna-div' id='left-div'>
               <img class='social-img' id='intro-img' src="../images/introvert.png" alt="">  
               <p>Introverted</p>
-              <img id='earlybird-img' src="../images/earlybird.png" alt="">
+              <img class='wake-img' id='earlybird-img' src="../images/earlybird.png" alt="">
               <p>Early Bird</p>
-              <img id='snowflake-img' src="../images/snowflake.png" alt="">
+              <img class='temp-img' id='snowflake-img' src="../images/snowflake.png" alt="">
               <p>Cold-blooded</p>              
             </div>
             <div class='dna-div' id='right-div'>
               <img class='social-img' id='extro-img' src="../images/extrovert.png" alt=""> 
               <p>Extroverted</p>
             
-              <img id='nightowl-img' src="../images/nightowl.png" alt="">              
+              <img class='wake-img' id='nightowl-img' src="../images/nightowl.png" alt="">              
               <p>Night Owl</p>
 
-              <img id='flame-img' src="../images/flame.png" alt="">
+              <img class='temp-img' id='flame-img' src="../images/flame.png" alt="">
               <p>Hot-headed</p>              
                          
             </div>

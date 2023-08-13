@@ -1,8 +1,16 @@
 body{
     background-color: #495057;
 }
+a{
+    color: whitesmoke;
+}
 
-#hud-menu{
+a:hover{
+    text-decoration: none;
+    color: rgb(67, 67, 234);
+}
+
+.hud-menu{
     display: flex;
     column-gap: 1em;
 }
@@ -42,79 +50,106 @@ body{
 }
 
 
-#game-div{
+.game-div{
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap:5em;
+    row-gap:4em;
 }
-#game-div p{
+.game-div p{
     font-size: 1.5em;
     padding: 2em;
     text-align: center;
     color: white;
 }
 
-.choice_btn{
+.choice-btn{
     width: 15em;
     height: 5em;
     border-radius: 10px;
     background-color: #242235;
     border: 2px;
     color: white;
+    display: none;
+}
+.choice-btn:hover{
+    cursor: pointer;
+}
+.choice-btn:focus{
+    background-color: antiquewhite;
+    color: #242235;
+    transition: 0.6s;
 }
 
-#main-menu{
-    display: flex;
-    width: 100%;
-    bottom: 0px;
-    position: fixed;
+.question-btn{
+    width: 6em;
+    height: 2em;
+    border-radius: 10px;
+    font-size: 2em;
     background-color: #242235;
-    flex-direction: column;
-    z-index: 2;
+    border: 2px;
+    color: whitesmoke;
+    filter: drop-shadow(2px 4px 6px black);
 }
-#main-menu .title{
-    font-size: 2.5em;
-    text-align: center;
-    color: white;
+.question-btn:hover{
+    background-color: whitesmoke;
+    color: #242235;
+    transition: 0.7s;
+    cursor: pointer;
 }
-.menu-active{
-    animation:menu-active 0.4s linear;
-    height: 100%;
-    row-gap: 4em;
+#begin-btn{
+    display: block;
 }
-@keyframes menu-active{
-    0%{height: 5%;}
-    25%{height: 25%;}
-    50%{height: 50%;}
-    75%{height: 75%;}
-    100%{height: 100%;}
+#next-btn{
+    display: none;
+}
+#back-btn{
+    display: none;
+}
+#submit-btn{
+    display: none;
 }
 
-#menu-contents{
+
+.menu{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 2em;
+    background-color: black;
+    z-index: 1;
+    font-size: 2.5em;
+    padding: 0.2em;
+}
+
+.main-menu{
+    position: fixed;
+    height: 0%;
+    width: 100%;
+    bottom: 0;
+    z-index: 0;
+    background-color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 3em;
-    color: white;
-    font-weight: 100;
-}
-.menu-div{
-    display: none;
-}
-.menu-div-active{
-    display: flex;
-    flex-direction: row;
     justify-content: center;
-    column-gap: 5em;
-    transition: menu-div-active 1s linear;
+    text-align: center;
+    transition: 0.5s;
     font-size: 2.5em;
 }
-@keyframes menu-div-active{
-    0%{
-        display: none;
-    }
-    100%{
-        display: flex;
-    }
+.main-menu-active{
+    display: flex;
+    z-index: 2;
+    height: 100%;
+    row-gap: 1em;
+}
+.main-menu a{
+    color:transparent;
+}
+
+.main-menu-active a{
+    color: white;
+}
+.main-menu-active a:hover{
+    color:rgb(39, 39, 223);
 }

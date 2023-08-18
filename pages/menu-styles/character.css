@@ -37,6 +37,9 @@
     justify-content: space-between;
     flex-wrap: wrap;
 }
+#bio-stats p{
+    font-size: 2em;
+}
 #bio-history{
     width: 100%;
     border: 3px solid black;
@@ -110,6 +113,6 @@
     width: 5em;
 }
 
-#stats-content ul{
-    list-style: none;
+#stats-content p{
+    font-size: 2em;
 }

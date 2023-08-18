@@ -1,3 +1,5 @@
+
+
 $('#open-menu').click(function(){
    $('.main-menu').toggleClass('main-menu-active');
 });
@@ -141,29 +143,171 @@ function sendResults(stats){
        "temper": stats[4],
     };
 
-    $.post("stats.php", JSON.stringify(result), function(data){
+    $.post("testSubmit.php", JSON.stringify(result), function(data){
         let identity = data;
         console.log(identity);
     }, "text")
     .done(function(){
         console.log("request done")
     })
+};
 
+/* functions for Character.php */
+let userID = {};
+let dnaBtn = $("#dna-btn");
+
+function receiveJSON(){
+  fetch('info-check.php')
+  .then(response => response.json())
+  .then(data => {
+    userID = {
+        "Name": data.name,
+        "Mind": data.mind,
+        "Social": data.social,
+        "Temper": data.temper,
+        "Wake": data.wake,
+    }
+    resultStart(userID);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
 };
 
 
-// functions for Character.php
+receiveJSON(); // Allows us to use userID values
+
+dnaBtn.click(function(){
+    // This function will receive the JSON to affect the styling
+    // of the elements
+    let brainImg = $('#brain');
+    let introSide = $('#intro-img');
+    let extroSide = $('#extro-img');
+    let earlyBird = $('#earlybird-img');
+    let nightOwl = $('#nightowl-img');
+    let coldBlood = $('#snowflake-img');
+    let hotHead = $('#flame-img');
+    
+    // raise scale of chosen stats 
+    // and lower opacity of other
+    switch(userID.Mind){
+        case "Logical":
+         brainImg.attr('src', '../images/left-brain.png');
+         break;
+        case "Creative":
+         brainImg.attr('src', '../images/right-brain.png');
+         break;
+    }
+    switch(userID.Social){
+        case "Introvert":
+         introSide.css('width', '7em');
+         extroSide.css('opacity', '40%');
+         break;
+        case "Extrovert":
+         extroSide.css('width', '7em');
+         introSide.css('opacity', '40%');
+         break;
+    }
+    switch(userID.Wake){
+        case "Early Bird":
+            earlyBird.css('width', '8em');
+            nightOwl.css('opacity', '20%');
+         break;
+        case "Night Owl":
+            nightOwl.css('width', '7em');
+            earlyBird.css('opacity', '40%');
+         break;
+    }
+    switch(userID.Temper){
+        case "Hot-headed":
+            hotHead.css('width', '8em');
+            coldBlood.css('opacity', '20%');
+         break;
+        case "Cold-blooded":
+            coldBlood.css('width', '7em');
+            hotHead.css('opacity', '40%');
+         break;
+    }
+
+});
+
+function resultStart(stats){
+    let strStat = parseInt($('#str-stat').text());
+    let wpStat = parseInt($('#wp-stat').text());
+    let techStat = parseInt($('#tech-stat').text());
+    let agiStat = parseInt($('#str-stat').text());
+    let perStat = parseInt($('#str-stat').text());
+    let intStat = parseInt($('#str-stat').text());
+
+   
+    switch(stats.Mind){
+        case "Logical":
+         perStat++;
+         intStat++;
+         break;
+        case "Creative":
+         techStat++;
+         wpStat++;
+         break;
+    }
+    switch(stats.Social){
+        case "Introvert":
+            perStat++;
+            techStat++;
+            intStat++;
+         break;
+        case "Extrovert":
+            strStat++;
+            wpStat++;
+            agiStat++;
+         break;
+    }
+    switch(stats.Wake){
+        case "Early Bird":
+            strStat++;
+            intStat++;
+         break;
+        case "Night Owl":
+            wpStat++;
+            perStat++;
+         break;
+    }
+    switch(stats.Temper){
+        case "Hot-headed":
+            strStat++;
+            wpStat++;  
+         break;
+        case "Cold-blooded":
+            techStat++;
+            agiStat++;
+         break;
+    }
 
 
-//This function will affect the stats on the client-side
-function sendStyle(stats){
-    console.log(stats);
+    let intStats = {
+     "Strength": strStat,
+     "Willpower": wpStat,
+     "Technique": techStat,
+     "Agility": agiStat,
+     "Perception": perStat,
+     "Intuition": intStat,
+    }
+    console.log(intStats);
+
+    const sendStatChange = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(intStats)
+      };
+
+    fetch('stat-change.php', sendStatChange)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 }
-// User object- ID properties
-
-const userStats = {
-    name: "",
-    health: 100,
-    energy: 50,
-}
-

@@ -5,18 +5,20 @@
  $username = "SELECT name FROM stats ORDER BY id DESC LIMIT 1";
  $result = $conn->query($username);
 
+ //Displays name of user
  if ($conn->query($username) == TRUE) {
    if ($result->num_rows > 0) {
-     while ($row = $result->fetch_assoc()) {
+      while ($row = $result->fetch_assoc()) {
+        // sets $username to $playername to be displayed
        $playername = $row["name"];
-     }
-    } else{
+      };
+   }else{
        echo "Error: " . $username . "<br>" . $conn->error;
      } 
-}else{
-  echo "Error";
-}
- 
+ }else{
+    echo "Error";
+};
+
 
 ?>
 
@@ -72,8 +74,8 @@
           <div id='brain-div'>
             <img id='brain' src="../images/demo-brain.png" alt="top view of brain">
             <div id='brain-title'>
-             <p>Left-brained</p>
-             <p>Right-brained</p> 
+             <p>Logical</p>
+             <p>Creative</p> 
             </div>    
           </div>     
 
@@ -83,6 +85,7 @@
               <p>Introverted</p>
               <img class='wake-img' id='earlybird-img' src="../images/earlybird.png" alt="">
               <p>Early Bird</p>
+              
               <img class='temp-img' id='snowflake-img' src="../images/snowflake.png" alt="">
               <p>Cold-blooded</p>              
             </div>
@@ -101,15 +104,47 @@
   
         </div>
         <div class='char-content content-deactive' id='stats-content'>
-          <p>Attributes</p> 
-          <ul>
-            <li>Strength:</li>
-            <li>Willpower:</li>
-            <li>Technique:</li>
-            <li>Agility:</li>
-            <li>Intuition:</li>
-            <li>Perception:</li>
-          </ul>
+          <p>Attributes</p>  
+    
+            <div>
+              <form action="/action_page.php">
+              <label for="strength"><h3>Strength:</h3></label>
+               <p id='str-stat'>0</p>
+              </form>
+            </div>    
+            <div>
+               <form action="/action_page.php">
+                <label for="willpower"><h3>Willpower:</h3></label>
+                <p id='wp-stat'>0</p>
+               </form>
+            </div>
+            <div>
+  
+              <form action="/action_page.php">
+               <label for="technique"><h3>Technique:</h3></label>
+               <p id='tech-stat'>0</p>
+              </form>
+            </div>
+            <div>
+              
+              <form action="/action_page.php">
+                <label for="agility"><h3>Agility:</h3></label>
+                <p id='agi-stat'>0</p>
+              </form>                     
+            </div>
+            <div>
+               <form action="/action_page.php">
+                <label for="intuition"><h3>Intuition:</h3></label>
+                <p id='int-stat'>0</p>
+               </form>               
+            </div>
+            <div>
+              <form action="/action_page.php">
+               <label for="perception"><h3>Perception:</h3></label>
+               <p id='per-stat'>0</p>
+              </form>
+            </div>
+
         </div>
     </div>
 

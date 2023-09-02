@@ -232,13 +232,13 @@ dnaBtn.click(function(){
 });
 
 function resultStart(stats){
-    let strStat = parseInt($('#str-stat').text());
-    let wpStat = parseInt($('#wp-stat').text());
-    let techStat = parseInt($('#tech-stat').text());
-    let agiStat = parseInt($('#str-stat').text());
-    let perStat = parseInt($('#str-stat').text());
-    let intStat = parseInt($('#str-stat').text());
-
+    let strStat = 0;
+    
+    let wpStat = 0;
+    let techStat = 0;
+    let agiStat = 0;
+    let perStat = 0;
+    let intStat = 0;
    
     switch(stats.Mind){
         case "Logical":
@@ -284,7 +284,7 @@ function resultStart(stats){
     }
 
 
-    let intStats = {
+    const intStats = {
      "Strength": strStat,
      "Willpower": wpStat,
      "Technique": techStat,
@@ -292,7 +292,6 @@ function resultStart(stats){
      "Perception": perStat,
      "Intuition": intStat,
     }
-    console.log(intStats);
 
     const sendStatChange = {
         method: 'POST',
@@ -300,14 +299,18 @@ function resultStart(stats){
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(intStats)
-      };
+    };
 
     fetch('stat-change.php', sendStatChange)
-    .then(response => response.json())
+    .then(response => response.text())
     .then(data => {
       console.log(data);
     })
     .catch(error => {
       console.error('Error:', error);
     });
+}
+
+function resultUpdate(stats){
+
 }

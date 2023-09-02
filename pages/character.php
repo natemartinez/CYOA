@@ -4,13 +4,13 @@
 
  $username = "SELECT name FROM stats ORDER BY id DESC LIMIT 1";
  $result = $conn->query($username);
-
+ $name = strval($_SESSION['username']);
  //Displays name of user
  if ($conn->query($username) == TRUE) {
    if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
         // sets $username to $playername to be displayed
-       $playername = $row["name"];
+       $_SESSION['username'] = $row["name"];
       };
    }else{
        echo "Error: " . $username . "<br>" . $conn->error;
@@ -19,7 +19,29 @@
     echo "Error";
 };
 
+//Receives all stats of current user to be displayed
+$allStats = "SELECT * FROM stats WHERE name = '$name'";
 
+$result2 = $conn->query($allStats);
+
+ if ($result2 == TRUE) {
+   if ($result2->num_rows > 0) {
+    $row = $result2->fetch_assoc();
+    $strength = $row['strength'];
+    $willpower = $row['willpower'];
+    $technique = $row['technique'];
+    $agility = $row['agility'];
+    $intuition = $row['intuition'];
+    $perception = $row['perception'];
+   }else {
+     echo "No records found with ID: $id";
+   }
+ }else{
+   echo "Error";
+ };
+
+
+$conn->close();
 ?>
 
 <html>
@@ -57,7 +79,7 @@
         <div class='char-content' id='bio-content'>    
           <div id='bio-stats'>
             <div>
-             <p>Name: <?php echo $playername; ?></p>
+             <p>Name: <?php echo $_SESSION['username']; ?></p>
              <p>Level:</p>
             </div>
             <div id='profile'></div>            
@@ -109,39 +131,39 @@
             <div>
               <form action="/action_page.php">
               <label for="strength"><h3>Strength:</h3></label>
-               <p id='str-stat'>0</p>
+               <p id='str-stat'><?php echo $strength; ?></p>
               </form>
             </div>    
             <div>
                <form action="/action_page.php">
                 <label for="willpower"><h3>Willpower:</h3></label>
-                <p id='wp-stat'>0</p>
+                <p id='wp-stat'><?php echo $willpower; ?></p>
                </form>
             </div>
             <div>
   
               <form action="/action_page.php">
                <label for="technique"><h3>Technique:</h3></label>
-               <p id='tech-stat'>0</p>
+               <p id='tech-stat'><?php echo $technique; ?></p>
               </form>
             </div>
             <div>
               
               <form action="/action_page.php">
                 <label for="agility"><h3>Agility:</h3></label>
-                <p id='agi-stat'>0</p>
+                <p id='agi-stat'><?php echo $agility; ?></p>
               </form>                     
             </div>
             <div>
                <form action="/action_page.php">
                 <label for="intuition"><h3>Intuition:</h3></label>
-                <p id='int-stat'>0</p>
+                <p id='int-stat'><?php echo $intuition; ?></p>
                </form>               
             </div>
             <div>
               <form action="/action_page.php">
                <label for="perception"><h3>Perception:</h3></label>
-               <p id='per-stat'>0</p>
+               <p id='per-stat'><?php echo $perception; ?></p>
               </form>
             </div>
 

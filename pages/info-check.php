@@ -7,9 +7,9 @@
  $result = $conn->query($username);
 
  //Displays name of user
- if ($conn->query($username) == TRUE) {
+ if ($result == TRUE) {
    if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
+      while ($row = $result->fetch_assoc()){
        $playername = $row["name"];
        $mindTrait = $row["mind"];
        $socialTrait = $row["social"];
@@ -23,7 +23,7 @@
         'temper' => $temperTrait,
        );
        $jsonData = json_encode($data);
-       
+
        echo $jsonData;
       };
    }else{

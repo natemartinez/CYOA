@@ -63,7 +63,7 @@ a:hover{
     color: white;
 }
 
-.choice-btn{
+.test-btn{
     width: 15em;
     height: 5em;
     border-radius: 10px;
@@ -72,10 +72,10 @@ a:hover{
     color: white;
     display: none;
 }
-.choice-btn:hover{
+.test-btn:hover{
     cursor: pointer;
 }
-.choice-btn:focus{
+.test-btn:focus{
     background-color: antiquewhite;
     color: #242235;
     transition: 0.6s;

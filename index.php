@@ -1,6 +1,8 @@
 <?php    
  session_start();
 
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,10 +49,13 @@
     </div>
 
     <div class='game-div'>
-     <p>Example Text - Lorem ipsum dolor, sit amet consectetur adipisicing elit. <br> Fugit at suscipit quis iste, saepe vero dicta repellat</p>
+     <p id='main-text'>
+      This is the beginning of your test. You walk through a suspicious building,
+      in search for the truth.<br> What exactly is that truth? That's up to you
+     </p>
 
-     <button class='choice_btn'>Choice 1</button>
-     <button class='choice_btn'>Choice 2</button>     
+     <button id='game-btn1'>Choice 1</button>
+     <button id='game-btn2'>Choice 2</button>     
     </div>
 
     <div class='menu text-center'>

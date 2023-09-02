@@ -1,5 +1,4 @@
 
-
 $('#open-menu').click(function(){
    $('.main-menu').toggleClass('main-menu-active');
 });
@@ -7,7 +6,7 @@ $('#close-menu').click(function(){
     $('.main-menu').toggleClass('main-menu-active');
 })
 
-// For the character.php page functionality
+// For the character.php page functionality(front-end)
 
 $('#bio-link').click(function(){
     $('#bio-content').removeClass('content-deactive');
@@ -24,7 +23,6 @@ $('#stats-link').click(function(){
     $('#dna-content').addClass('content-deactive');
     $('#bio-content').addClass('content-deactive');
 });
-//
 
 // Character test to determine identity 
 let mainText = $('#main-text');
@@ -34,12 +32,13 @@ let socialTrait = ''; //intro/extro-verted
 let wakeTrait = ''; //earlyBird/nightOwl
 let temperTrait = '';//hotHeaded/coldBlooded
 
-let choiceButton1 = $('#choice1');
-let choiceButton2 = $('#choice2');
+let testButton1 = $('#choice1');
+let testButton2 = $('#choice2');
 let nextButton = $('#next-btn');
 let backButton = $('#back-btn');
 let beginButton = $('#begin-btn');
 let submitButton = $('#submit-btn');
+let dnaBtn = $("#dna-btn");
 
 let questions = [
     "Are you Logical or Creative?",
@@ -63,13 +62,13 @@ let i = 0;
 let x = 0; // Variables will be used to
 let y = 1; // give choice buttons their names with iteration
 
-choiceButton1.click(function(){
-    choice = choiceButton1.text();
+testButton1.click(function(){
+    choice = testButton1.text();
     choiceSelect = true;
     
 });
-choiceButton2.click(function(){
-    choice = choiceButton2.text();
+testButton2.click(function(){
+    choice = testButton2.text();
     choiceSelect = true;
 });
 
@@ -82,10 +81,10 @@ beginButton.click(function(){
     nextButton.css('display', 'unset');
     backButton.css('display', 'unset');
 
-    choiceButton1.css('display', 'unset');
-    choiceButton1.text(traits[x]);
-    choiceButton2.css('display', 'unset');
-    choiceButton2.text(traits[y]);
+    testButton1.css('display', 'unset');
+    testButton1.text(traits[x]);
+    testButton2.css('display', 'unset');
+    testButton2.text(traits[y]);
     
     mainText.text(questions[i]);
     answer.push(nameInput);
@@ -105,15 +104,15 @@ nextButton.click(function(){
     i += 1; 
 
     mainText.text(questions[i]);
-    choiceButton1.text(traits[x]);
-    choiceButton2.text(traits[y]);
+    testButton1.text(traits[x]);
+    testButton2.text(traits[y]);
 
     if(i == 4){
        mainText.text("Your result is complete");
        nextButton.css('display', 'none');
        backButton.css('display', 'none');
-       choiceButton1.css('display', 'none');
-       choiceButton2.css('display', 'none');
+       testButton1.css('display', 'none');
+       testButton2.css('display', 'none');
        submitButton.css('display', 'unset');
     }
 });
@@ -124,8 +123,8 @@ backButton.click(function(){
     y = y - 2;
 
     mainText.text(questions[i]);
-    choiceButton1.text(traits[x]);
-    choiceButton2.text(traits[y]);
+    testButton1.text(traits[x]);
+    testButton2.text(traits[y]);
 });
 
 submitButton.click(function(e){
@@ -133,49 +132,6 @@ submitButton.click(function(e){
     sendResults(answer);
     location.href = "pages/character.php";
 });
-
-function sendResults(stats){
-    let result = {
-       "name": stats[0],
-       "mind": stats[1],
-       "social": stats[2],
-       "wake": stats[3],
-       "temper": stats[4],
-    };
-
-    $.post("testSubmit.php", JSON.stringify(result), function(data){
-        let identity = data;
-        console.log(identity);
-    }, "text")
-    .done(function(){
-        console.log("request done")
-    })
-};
-
-/* functions for Character.php */
-let userID = {};
-let dnaBtn = $("#dna-btn");
-
-function receiveJSON(){
-  fetch('info-check.php')
-  .then(response => response.json())
-  .then(data => {
-    userID = {
-        "Name": data.name,
-        "Mind": data.mind,
-        "Social": data.social,
-        "Temper": data.temper,
-        "Wake": data.wake,
-    }
-    resultStart(userID);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-};
-
-
-receiveJSON(); // Allows us to use userID values
 
 dnaBtn.click(function(){
     // This function will receive the JSON to affect the styling
@@ -231,9 +187,70 @@ dnaBtn.click(function(){
 
 });
 
-function resultStart(stats){
-    let strStat = 0;
+// Inventory page
+let itemSlot = $('.item');
+
+itemSlot.click(function(e){
+    //Function triggers info that belongs to that item
+    e.preventDefault();
+    let itemText = $(this).text();
+    let itemJSON = sessionStorage.getItem(itemText);
+
+    let itemInfo = JSON.parse(itemJSON);
+
+    //This is where we display each property in the info-box
+
     
+    $('#info-name').text(itemInfo.name);
+    $('#info-type').text(itemInfo.type);
+    $('#info-rarity').text(itemInfo.rarity);
+    
+
+})
+
+
+function sendResults(stats){
+    let result = {
+       "name": stats[0],
+       "mind": stats[1],
+       "social": stats[2],
+       "wake": stats[3],
+       "temper": stats[4],
+    };
+
+    $.post("testSubmit.php", JSON.stringify(result), function(data){
+        let identity = data;
+        console.log(identity);
+    }, "text")
+    .done(function(){
+        console.log("request done")
+    })
+};
+
+/* functions for displaying stats & test results */
+let userID = {};
+
+function receiveJSON(){
+  fetch('info-check.php')
+  .then(response => response.json())
+  .then(data => {
+    userID = {
+        "Name": data.name,
+        "Mind": data.mind,
+        "Social": data.social,
+        "Temper": data.temper,
+        "Wake": data.wake,
+    }
+    resultStart(userID);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+};
+receiveJSON(); // Allows us to use userID values
+
+function resultStart(stats){ //This function initializes stats for user           
+    let strStat = 0;
     let wpStat = 0;
     let techStat = 0;
     let agiStat = 0;
@@ -309,8 +326,161 @@ function resultStart(stats){
     .catch(error => {
       console.error('Error:', error);
     });
-}
-
-function resultUpdate(stats){
+    //Send stats to another function
 
 }
+
+// Actual gameplay
+
+//Buttons to play game
+let scenarioText = $('#main-text');
+let gameButton1 = $('#game-btn1');
+let gameButton2 = $('#game-btn2');
+
+// This function will hold inventory
+class gameEvent{
+    constructor(level,levelName,type){
+        this.level = level;
+        this.levelName = levelName;
+        this.type = type;
+    }
+};
+
+class Item {
+     constructor(name,type,effect,rarity,img){
+         this.name = name;
+         this.type = type;
+         this.effect = effect;
+         this.rarity = rarity;
+         this.img = img;
+     }
+};
+
+//Initialize basic item objects
+const dice = new Item('Dice', 'Outcome', 'Outcome', 'Common') //Random roll changes the num to affect outcome
+const stick = new Item('Stick','Attack','Health', 'Common', '../images/stick.png');
+const shirt = new Item('Shirt','Gear','Armor','Common');
+const medKit = new Item('Med-Kit', 'Support','Health','Common');
+
+const battle = new gameEvent( 1,'Hallway','battle'); //have types of battles with D&D / Citizen Sleeper before fight
+
+let gameChoices = [{
+    //Could use $_GET[] here
+    scenario:'Search the floor',
+    result:stick,
+    resultText:"Cool...You found a stick"
+  },
+  {
+    scenario:'Search the drawer',
+    result:shirt,
+    resultText:"Sick shirt!...It belonged to a sick person, you sicko"
+  },
+  {
+    scenario:'Leave the room',
+    result:battle,
+    resultText:"Battle has begun"
+  },
+  {
+    scenario:'Search the drawer',
+    result:medKit,
+    resultText:"You found a med kit"
+  },
+  {
+    scenario:'Leave the room',
+    result:battle,
+    resultText:"Battle has begun"
+  },
+  {
+    scenario:'Look under the bed',
+    result:shirt,
+    resultText:"You found nothing"
+  },
+  // After first battle
+  {
+    scenario:'Look under the bed',
+    result:shirt,
+    resultText:"You found nothing"
+  }
+]
+let inventory = [];
+
+function collectItem(item){
+    //alert that tells user what they've collected
+   inventory.push(item);
+   let myItem =  JSON.stringify(item);
+
+   sessionStorage.setItem(item.name, myItem);
+  
+   displayItems(inventory);
+}
+
+collectItem(stick);
+collectItem(shirt);
+collectItem(medKit);
+
+
+//function to display items to inventory.php
+function displayItems(inventory){
+   for(let i=0; i<inventory.length; i++){
+    let itemNum = i.toString();
+    let currentItemName = inventory[i].name;
+    $('#item' + itemNum).text(currentItemName);
+    
+   }
+
+}
+
+/* I'm blocking until I can figure out how to send items to server
+
+
+function setScenario(){
+   
+    gameButton1.text(gameChoices[a].scenario);
+    gameButton2.text(gameChoices[b].scenario);
+
+    button1Result = gameChoices[a].result;
+    button2Result = gameChoices[b].result;
+
+    resultText1 = gameChoices[a].resultText;
+    resultText2 = gameChoices[b].resultText;
+
+    a = a + 2;
+    b = b + 2; 
+    
+}
+function setOutcome(event, nextEvent){
+    //if item is input, fire item event
+    //if attack is input, fire attack event
+   
+    if(event == "nothing"){
+        alert('You found nothing')
+    };
+
+    if(event instanceof Item){
+      collectItem(event);
+      scenarioText.text(nextEvent); 
+
+    } else if(event instanceof gameEvent){
+
+        if(event.type == 'battle'){
+            alert('battle has begun');
+            battleStart(event.level,event.levelName);
+        }
+
+    };
+
+    setScenario();
+ // use control flow to add item to inventory based on choice
+ // Need to fire 
+    
+};
+*/
+
+// setScenario();
+
+gameButton1.click(function(){
+    setOutcome(button1Result, resultText1);
+});
+gameButton2.click(function(){
+    setOutcome(button2Result, resultText2);
+});

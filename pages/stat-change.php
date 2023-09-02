@@ -1,4 +1,5 @@
 <?php
+//This php page will be used to update all stats that need to changed
 
 session_start();
 include '../db.php';
@@ -28,7 +29,7 @@ $name = strval($_SESSION['username']);
         
 
   if($conn->query($sql) === TRUE) {
-   echo "Query successful";
+   echo "Stats updated";
    }else{
      echo "Error: " . $sql . "<br>" . $conn->error;
   }

@@ -1,5 +1,7 @@
 <?php    
  session_start();
+ include '../db.php';
+
 
 ?>
 <!DOCTYPE html>
@@ -25,9 +27,9 @@
     <h2 class='text-center'>Inventory</h2>
 
     <div class='inv-wrap'>
-        <div class='item'>A</div>
-        <div class='item'>B</div>
-        <div class='item'>C</div>
+        <div class='item' id='item0'>A</div>
+        <div class='item' id='item1'>B</div>
+        <div class='item' id='item2'>C</div>
         <div class='item'>D</div>
         <div class='item'>E</div>
         <div class='item'>F</div>
@@ -36,14 +38,17 @@
         <div class='item'>F</div>
     </div>
 
-    <div class='info-box'>
+    <div id='info-box'>
         <h3 class='text-center'>Info</h3>
+        <p id='info-name'></p>
+        <p id='info-rarity'></p>
+        <p id='info-type'></p>
     </div>
    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="../script.js"></script>
 </body>
 </html>
 

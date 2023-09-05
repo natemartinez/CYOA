@@ -191,21 +191,14 @@ dnaBtn.click(function(){
 let itemSlot = $('.item');
 
 itemSlot.click(function(e){
-    //Function triggers info that belongs to that item
+    //grabs info based on id in the slot
     e.preventDefault();
-    let itemText = $(this).text();
-    let itemJSON = sessionStorage.getItem(itemText);
-
-    let itemInfo = JSON.parse(itemJSON);
-
-    //This is where we display each property in the info-box
-
+    let itemID = $(this).attr('id');
+    let savedInventory = JSON.parse(sessionStorage.getItem('inventory'));
     
-    $('#info-name').text(itemInfo.name);
-    $('#info-type').text(itemInfo.type);
-    $('#info-rarity').text(itemInfo.rarity);
-    
-
+    $('#info-name').text(savedInventory[itemID].name);
+    $('#info-type').text(savedInventory[itemID].type);
+    $('#info-rarity').text(savedInventory[itemID].rarity);
 })
 
 
@@ -337,6 +330,9 @@ let scenarioText = $('#main-text');
 let gameButton1 = $('#game-btn1');
 let gameButton2 = $('#game-btn2');
 
+let a = 0;
+let b = 1;
+
 // This function will hold inventory
 class gameEvent{
     constructor(level,levelName,type){
@@ -404,34 +400,30 @@ let gameChoices = [{
 ]
 let inventory = [];
 
+
 function collectItem(item){
-    //alert that tells user what they've collected
    inventory.push(item);
-   let myItem =  JSON.stringify(item);
+   sessionStorage.setItem('inventory', JSON.stringify(inventory));
 
-   sessionStorage.setItem(item.name, myItem);
-  
-   displayItems(inventory);
-}
+   displayItems();
+     
+   //code below alerts the user what item they've found
+   var x = $('#snackbar');
+   x.text('You found a ' + item.name);
+   x.addClass('show');
+   setTimeout(function(){ x.removeClass('show'); }, 2000);
+};
 
-collectItem(stick);
-collectItem(shirt);
-collectItem(medKit);
-
-
-//function to display items to inventory.php
-function displayItems(inventory){
-   for(let i=0; i<inventory.length; i++){
-    let itemNum = i.toString();
-    let currentItemName = inventory[i].name;
-    $('#item' + itemNum).text(currentItemName);
-    
+function displayItems(){ 
+   let savedInventory = JSON.parse(sessionStorage.getItem('inventory'));
+   for(let i=0; i<savedInventory.length;i++){
+    // savedInventory[i] = item[i]
+    $('#' + i).text(
+         savedInventory[i].name
+    )
    }
 
 }
-
-/* I'm blocking until I can figure out how to send items to server
-
 
 function setScenario(){
    
@@ -451,7 +443,7 @@ function setScenario(){
 function setOutcome(event, nextEvent){
     //if item is input, fire item event
     //if attack is input, fire attack event
-   
+    
     if(event == "nothing"){
         alert('You found nothing')
     };
@@ -474,9 +466,9 @@ function setOutcome(event, nextEvent){
  // Need to fire 
     
 };
-*/
 
-// setScenario();
+
+setScenario();
 
 gameButton1.click(function(){
     setOutcome(button1Result, resultText1);
@@ -484,3 +476,4 @@ gameButton1.click(function(){
 gameButton2.click(function(){
     setOutcome(button2Result, resultText2);
 });
+

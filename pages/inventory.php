@@ -21,15 +21,15 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="displayItems()">
     <a href="../index.php"><img id='back-arrow' src="../images/back-arrow.png" alt="black arrow"></a>
 
     <h2 class='text-center'>Inventory</h2>
 
     <div class='inv-wrap'>
-        <div class='item' id='item0'>A</div>
-        <div class='item' id='item1'>B</div>
-        <div class='item' id='item2'>C</div>
+        <div class='item' id='0'></div>
+        <div class='item' id='1'></div>
+        <div class='item' id='2'></div>
         <div class='item'>D</div>
         <div class='item'>E</div>
         <div class='item'>F</div>
@@ -41,8 +41,8 @@
     <div id='info-box'>
         <h3 class='text-center'>Info</h3>
         <p id='info-name'></p>
-        <p id='info-rarity'></p>
         <p id='info-type'></p>
+        <p id='info-rarity'></p>
     </div>
    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>    

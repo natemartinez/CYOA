@@ -54,8 +54,10 @@
       in search for the truth.<br> What exactly is that truth? That's up to you
      </p>
 
-     <button id='game-btn1'>Choice 1</button>
-     <button id='game-btn2'>Choice 2</button>     
+     <button class='game-btn' id='game-btn1'>Choice 1</button>
+     <button class='game-btn' id='game-btn2'>Choice 2</button>  
+     
+     <div id="snackbar"></div>
     </div>
 
     <div class='menu text-center'>

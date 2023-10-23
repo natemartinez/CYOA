@@ -7,13 +7,14 @@ if(isset($_POST)){
   $result = json_decode($data, true);
 
   $name = var_export($result["name"], 1);
+  $password = var_export($result["password"], 1);
   $mind = var_export($result["mind"], 1);
   $social = var_export($result["social"], 1);
   $wake = var_export($result["wake"], 1);
   $temper = var_export($result["temper"], 1);
 
- $sql = "INSERT INTO stats (name, mind, social, wake, temper)
-VALUES ($name, $mind, $social, $wake, $temper)";
+ $sql = "INSERT INTO stats (name, password, mind, social, wake, temper)
+VALUES ($name, $password, $mind, $social, $wake, $temper)";
 
 if ($conn->query($sql) === TRUE) {
   echo "New record created successfully";

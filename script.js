@@ -75,6 +75,7 @@ testButton2.click(function(){
 beginButton.click(function(){
     let textBox = $('#name-input');
     const nameInput = $('#name-input').val();
+    const pswdInput = $('#pswd-input').val();
     
     textBox.css('display', 'none');
     beginButton.css('display', 'none');
@@ -88,6 +89,7 @@ beginButton.click(function(){
     
     mainText.text(questions[i]);
     answer.push(nameInput);
+    answer.push(pswdInput);
 });
 
 nextButton.click(function(){
@@ -188,29 +190,17 @@ dnaBtn.click(function(){
 });
 
 // Inventory page
-let itemSlot = $('.item');
-
-itemSlot.click(function(e){
-    //grabs info based on id in the slot
-    e.preventDefault();
-    let itemID = $(this).attr('id');
-    let savedInventory = JSON.parse(sessionStorage.getItem('inventory'));
-    
-    $('#info-name').text(savedInventory[itemID].name);
-    $('#info-type').text(savedInventory[itemID].type);
-    $('#info-rarity').text(savedInventory[itemID].rarity);
-})
 
 
 function sendResults(stats){
     let result = {
        "name": stats[0],
-       "mind": stats[1],
-       "social": stats[2],
-       "wake": stats[3],
-       "temper": stats[4],
+       "password": stats[1],
+       "mind": stats[2],
+       "social": stats[3],
+       "wake": stats[4],
+       "temper": stats[5],
     };
-
     $.post("testSubmit.php", JSON.stringify(result), function(data){
         let identity = data;
         console.log(identity);
@@ -229,6 +219,7 @@ function receiveJSON(){
   .then(data => {
     userID = {
         "Name": data.name,
+        "Password": data.password,
         "Mind": data.mind,
         "Social": data.social,
         "Temper": data.temper,
@@ -332,6 +323,18 @@ let gameButton2 = $('#game-btn2');
 
 let a = 0;
 let b = 1;
+let itemSlot = $('.item');
+
+itemSlot.click(function(e){
+    //grabs info based on id in the slot
+    e.preventDefault();
+    let itemID = $(this).attr('id');
+    let savedInventory = JSON.parse(sessionStorage.getItem('inventory'));
+    
+    $('#info-name').text(savedInventory[itemID].name);
+    $('#info-type').text(savedInventory[itemID].type);
+    $('#info-rarity').text(savedInventory[itemID].rarity);
+})
 
 // This function will hold inventory
 class gameEvent{
@@ -466,7 +469,6 @@ function setOutcome(event, nextEvent){
  // Need to fire 
     
 };
-
 
 setScenario();
 

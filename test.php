@@ -24,7 +24,8 @@
 
     <div class='game-div'>
      <p id='main-text'>Enter your name</p>
-     <input type="text" id="name-input">
+     <input type="text" id='name-input'placeholder='name'>
+     <input type="text" id='pswd-input' placeholder='password'>
 
       <div id='button-div'>
        <button class='choice-btn' id='choice1'>Choice 1</button>
